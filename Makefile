@@ -13,12 +13,10 @@ migrate:
 migrate.test:
 	./bin/console --no-interaction doctrine:migration:migrate --env=test
 
-down:
-	./bin/console --no-interaction doctrine:migration:down
-
 diff:
 	./bin/console --no-interaction doctrine:migration:diff
 
 load:
 	./bin/console --no-interaction doctrine:fixtures:load --purge-with-truncate
 
+migrate.update: diff migrate migrate.test
