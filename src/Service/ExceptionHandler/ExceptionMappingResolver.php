@@ -2,7 +2,10 @@
 
 namespace App\Service\ExceptionHandler;
 
-class ExceptionMappingResolver
+use App\Interface\Service\ExceptionHandler\ExceptionMappingInterface;
+use App\Interface\Service\ExceptionHandler\ExceptionMappingResolverInterface;
+
+class ExceptionMappingResolver implements ExceptionMappingResolverInterface
 {
     /**
      * @var ExceptionMapping[]
@@ -25,7 +28,7 @@ class ExceptionMappingResolver
         }
     }
 
-    public function resolve(string $throwableClass): ?ExceptionMapping
+    public function resolve(string $throwableClass): ?ExceptionMappingInterface
     {
         $foundMapping = null;
 

@@ -2,13 +2,15 @@
 
 namespace App\Service\ExceptionHandler;
 
-class ExceptionMapping
+use App\Interface\Service\ExceptionHandler\ExceptionMappingInterface;
+
+readonly class ExceptionMapping implements ExceptionMappingInterface
 {
-    public function __construct(private readonly int $code, private readonly bool $hidden, private readonly bool $loggable)
+    public function __construct(private int $code, private bool $hidden, private bool $loggable)
     {
     }
 
-    static public function fromCode(int $code): self
+    public static function fromCode(int $code): self
     {
         return new self($code, true, false);
     }

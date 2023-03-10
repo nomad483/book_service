@@ -20,3 +20,15 @@ load:
 	./bin/console --no-interaction doctrine:fixtures:load --purge-with-truncate
 
 migrate.update: diff migrate migrate.test
+
+database.drop:
+	./bin/console doctrine:database:drop --force
+
+database.create:
+	./bin/console doctrine:database:create
+
+database.drop.test:
+	./bin/console doctrine:database:drop --force --env=test
+
+database.create.test:
+	./bin/console doctrine:database:create --env=test

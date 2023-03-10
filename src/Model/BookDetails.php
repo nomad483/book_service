@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-readonly class BookListItem
+class BookDetails
 {
     private int $id;
 
@@ -19,7 +19,21 @@ readonly class BookListItem
 
     private int $publicationDate;
 
+    private float $rating;
+
+    private int $reviews;
+
     private bool $meep;
+
+    /**
+     * @var BookCategory[]
+     */
+    private array $categories;
+
+    /**
+     * @var BookFormat[]
+     */
+    private array $formats;
 
     public function getId(): int
     {
@@ -69,18 +83,11 @@ readonly class BookListItem
         return $this;
     }
 
-    /**
-     * @return string[]
-     */
     public function getAuthors(): array
     {
         return $this->authors;
     }
 
-    /**
-     * @param string[] $authors
-     * @return self
-     */
     public function setAuthors(array $authors): self
     {
         $this->authors = $authors;
@@ -100,6 +107,30 @@ readonly class BookListItem
         return $this;
     }
 
+    public function getRating(): float
+    {
+        return $this->rating;
+    }
+
+    public function setRating(float $rating): self
+    {
+        $this->rating = $rating;
+
+        return $this;
+    }
+
+    public function getReviews(): int
+    {
+        return $this->reviews;
+    }
+
+    public function setReviews(int $reviews): self
+    {
+        $this->reviews = $reviews;
+
+        return $this;
+    }
+
     public function isMeep(): bool
     {
         return $this->meep;
@@ -108,6 +139,30 @@ readonly class BookListItem
     public function setMeep(bool $meep): self
     {
         $this->meep = $meep;
+
+        return $this;
+    }
+
+    public function getCategories(): array
+    {
+        return $this->categories;
+    }
+
+    public function setCategories(array $categories): self
+    {
+        $this->categories = $categories;
+
+        return $this;
+    }
+
+    public function getFormats(): array
+    {
+        return $this->formats;
+    }
+
+    public function setFormats(array $formats): self
+    {
+        $this->formats = $formats;
 
         return $this;
     }

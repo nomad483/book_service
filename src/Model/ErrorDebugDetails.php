@@ -2,9 +2,9 @@
 
 namespace App\Model;
 
-class ErrorDebugDetails
+readonly class ErrorDebugDetails
 {
-    public function __construct(private readonly string $trace)
+    public function __construct(private string $trace)
     {
     }
 

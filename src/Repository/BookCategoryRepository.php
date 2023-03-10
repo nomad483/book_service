@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\BookCategory;
+use App\Interface\Repository\BookCategoryRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
@@ -15,7 +16,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method BookCategory[]    findAll()
  * @method BookCategory[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class BookCategoryRepository extends ServiceEntityRepository
+class BookCategoryRepository extends ServiceEntityRepository implements BookCategoryRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {

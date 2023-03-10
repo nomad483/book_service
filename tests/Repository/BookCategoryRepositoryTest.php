@@ -3,12 +3,13 @@
 namespace App\Tests\Repository;
 
 use App\Entity\BookCategory;
+use App\Interface\Repository\BookCategoryRepositoryInterface;
 use App\Repository\BookCategoryRepository;
 use App\Tests\AbstractRepositoryTest;
 
 class BookCategoryRepositoryTest extends AbstractRepositoryTest
 {
-    private BookCategoryRepository $bookCategoryRepository;
+    private BookCategoryRepositoryInterface $bookCategoryRepository;
 
     protected function setUp(): void
     {

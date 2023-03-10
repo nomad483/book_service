@@ -8,6 +8,7 @@ use App\Model\BookListItem;
 use App\Model\BookListResponse;
 use App\Repository\BookCategoryRepository;
 use App\Repository\BookRepository;
+use App\Repository\ReviewRepository;
 use App\Service\BookService;
 use App\Tests\AbstractTestCase;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -16,6 +17,7 @@ class BookServiceTest extends AbstractTestCase
 {
     public function testGetBookByCategoryNotFound(): void
     {
+        $reviewRepository = $this->createMock(ReviewRepository::class);
         $bookRepository = $this->createMock(BookRepository::class);
         $bookCategoryRepository = $this->createMock(BookCategoryRepository::class);
         $bookCategoryRepository->expects($this->once())
@@ -25,11 +27,12 @@ class BookServiceTest extends AbstractTestCase
 
         $this->expectException(BookCategoryNotFoundException::class);
 
-        (new BookService($bookRepository, $bookCategoryRepository))->getBookByCategory(130);
+        (new BookService($bookRepository, $bookCategoryRepository, $reviewRepository))->getBookByCategory(130);
     }
 
     public function testGetBookByCategory(): void
     {
+        $reviewRepository = $this->createMock(ReviewRepository::class);
         $bookRepository = $this->createMock(BookRepository::class);
         $bookRepository->expects($this->once())
             ->method('findBooksByCategoryId')
@@ -41,7 +44,7 @@ class BookServiceTest extends AbstractTestCase
             ->with(130)
             ->willReturn(true);
 
-        $service = new BookService($bookRepository, $bookCategoryRepository);
+        $service = new BookService($bookRepository, $bookCategoryRepository, $reviewRepository);
         $expected = new BookListResponse([$this->createBookItemModel()]);
 
         $this->assertEquals($expected, $service->getBookByCategory(130));
@@ -53,10 +56,12 @@ class BookServiceTest extends AbstractTestCase
             ->setTitle('Test book')
             ->setSlug('test-book')
             ->setMeep(false)
+            ->setIsbn('123456')
+            ->setDescription('test description')
             ->setAuthors(['Tester'])
             ->setCategories(new ArrayCollection())
             ->setImage('https://images.manning.com/360/480/resize/book/b/bc57fb7-b239-4bf5-bbf2-886be8936951/Tuominen-RxJava-HI.png')
-            ->setPublicationDate(new \DateTime('2020-10-10'));
+            ->setPublicationDate(new \DateTimeImmutable('2020-10-10'));
 
         $this->setEntityId($book, 123);
 

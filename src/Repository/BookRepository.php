@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Book;
+use App\Exception\BookNotFoundException;
+use App\Interface\Repository\BookRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -14,7 +16,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Book[]    findAll()
  * @method Book[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class BookRepository extends ServiceEntityRepository
+class BookRepository extends ServiceEntityRepository implements BookRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -22,7 +24,6 @@ class BookRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param int $id
      * @return Book[] Returns an array of Book objects
      */
     public function findBooksByCategoryId(int $id): array
@@ -31,5 +32,15 @@ class BookRepository extends ServiceEntityRepository
         $query->setParameter('categoryId', $id);
 
         return $query->getResult();
+    }
+
+    public function getById(int $id): Book
+    {
+        $book = $this->find($id);
+        if (null === $book) {
+            throw new BookNotFoundException();
+        }
+
+        return $book;
     }
 }

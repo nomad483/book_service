@@ -56,8 +56,10 @@ class BookControllerTest extends AbstractControllerTest
                 ->setCategories(new ArrayCollection([$bookCategory]))
                 ->setImage('http://localhost/test.png')
                 ->setAuthors(['Tester'])
-                ->setPublicationDate(new \DateTime())
+                ->setPublicationDate(new \DateTimeImmutable())
                 ->setMeep(false)
+                ->setIsbn('123456')
+                ->setDescription('test'),
         );
 
         $this->em->flush();

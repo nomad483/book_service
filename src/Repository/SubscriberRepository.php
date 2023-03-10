@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Subscriber;
+use App\Interface\Repository\SubscriberRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -14,7 +15,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Subscriber[]    findAll()
  * @method Subscriber[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class SubscriberRepository extends ServiceEntityRepository
+class SubscriberRepository extends ServiceEntityRepository implements SubscriberRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {

@@ -6,7 +6,7 @@ use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class SubscriberRequest
+readonly class SubscriberRequest
 {
     #[Email]
     #[NotBlank]

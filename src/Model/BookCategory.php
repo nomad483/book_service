@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-readonly class BookCategoryListItem
+readonly class BookCategory
 {
     private int $id;
 

@@ -2,9 +2,9 @@
 
 namespace App\Model;
 
-class ErrorValidationDetailsItem
+readonly class ErrorValidationDetailsItem
 {
-    public function __construct(private readonly string $field, private readonly string $message)
+    public function __construct(private string $field, private string $message)
     {
     }
 
